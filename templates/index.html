@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Peta Malang Raya</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Peta Malang Raya - Rute Terpendek</h1>
+   
+    
+
+    <form action="/cari" method="POST">
+        <label>Kota Asal:</label>
+        <select name="asal">
+            {% for kota in kota_list %}
+                <option value="{{ kota }}">{{ kota }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Kota Tujuan:</label>
+        <select name="tujuan">
+            {% for kota in kota_list %}
+                <option value="{{ kota }}">{{ kota }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Kecepatan (km/jam):</label>
+        <input type="number" step="0.1" name="kecepatan" required>
+
+        <button type="submit">Cari Rute</button>
+    </form>
+
+    {% if hasil %}
+    <div class="hasil">
+        <h2>Hasil Pencarian</h2>
+        <p>Rute Terpendek: {{ ' → '.join(rute) }}</p>
+        <p>Total Jarak: {{ jarak }} km</p>
+        <p>Estimasi Waktu: {{ "%.2f"|format(waktu) }} jam</p>
+    </div>
+    {% endif %}
+</body>
+</html>
+
+
+
